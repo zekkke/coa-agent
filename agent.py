@@ -14,7 +14,7 @@ fake = Faker()
 # Load environment variables
 BASE_URL = os.getenv("BASE_URL", "http://host.docker.internal:10000")
 FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:5173")
-MISTRAL_API_KEY = "eH1jwnate9tj2qnXFeySrkQnfBTdYAfW"
+MISTRAL_API_KEY = "MISTRAL_API_KEY"
 if not MISTRAL_API_KEY:
     raise ValueError("MISTRAL_API_KEY not set")
 
