@@ -66,7 +66,7 @@ def authenticate_user():
         custom_token = auth.create_custom_token(user.uid)
         
         firebase_url = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken"
-        api_key = "AIzaSyBChOBuQueBIdV3IxH1Klvge4pl4zwfx4Y"
+        api_key = "FIREBASE_API_KEY"
         response = requests.post(
             f"{firebase_url}?key={api_key}",
             json={"token": custom_token.decode(), "returnSecureToken": True}
