@@ -1,0 +1,37 @@
+services:
+  python-agent:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./agent.py:/app/agent.py
+    environment:
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - BASE_URL=http://host.docker.internal:10000
+      - FRONTEND_URL=http://host.docker.internal:5173
+      - FIREBASE_API_KEY=${FIREBASE_API_KEY}
+      - MISTRAL_API_KEY=${MISTRAL_API_KEY}
+    depends_on:
+      - n8n
+    networks:
+      - coa-network
+
+  n8n:
+    image: n8nio/n8n:1.55.3
+    ports:
+      - "5678:5678"
+    environment:
+      - N8N_HOST=0.0.0.0
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=http
+    volumes:
+      - n8n_data:/home/node/.n8n
+    networks:
+      - coa-network
+
+volumes:
+  n8n_data:
+
+networks:
+  coa-network:
+    driver: bridge

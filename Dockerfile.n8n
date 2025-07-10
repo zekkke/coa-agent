@@ -1,0 +1,13 @@
+FROM n8nio/n8n:1.56.2
+
+# Встановлення робочої директорії
+WORKDIR /home/node/.n8n
+
+# Встановлення axios локально
+RUN npm install axios
+
+# Відкриття порту n8n
+EXPOSE 5678
+
+# Запуск n8n
+CMD ["n8n", "start"]
