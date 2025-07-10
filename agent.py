@@ -14,7 +14,7 @@ fake = Faker()
 # Load environment variables
 BASE_URL = os.getenv("BASE_URL", "http://host.docker.internal:10000")
 FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:5173")
-MISTRAL_API_KEY = "MISTRAL_API_KEY"
+MISTRAL_API_KEY = os.getenv("MISTRAL_API_KEY")
 if not MISTRAL_API_KEY:
     raise ValueError("MISTRAL_API_KEY not set")
 
@@ -66,7 +66,7 @@ def authenticate_user():
         custom_token = auth.create_custom_token(user.uid)
         
         firebase_url = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken"
-        api_key = "FIREBASE_API_KEY"
+        api_key = os.getenv("FIREBASE_API_KEY")
         response = requests.post(
             f"{firebase_url}?key={api_key}",
             json={"token": custom_token.decode(), "returnSecureToken": True}
